@@ -1,9 +1,9 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You 💌</title>
+<title>For Afell 💖</title>
 
 <style>
 body {
@@ -28,10 +28,6 @@ body {
   transition: 1s;
 }
 
-#opening h1 {
-  font-size: 26px;
-}
-
 #opening button {
   margin-top: 20px;
   padding: 12px 25px;
@@ -48,9 +44,10 @@ body {
   transition: 1.5s;
 }
 
+/* FOTO ATAS */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   padding: 15px;
 }
@@ -69,6 +66,7 @@ body {
   opacity: 1;
 }
 
+/* FOTO UTAMA */
 .container {
   text-align: center;
 }
@@ -85,16 +83,12 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-h2 {
-  margin-top: 15px;
-}
-
-/* UCAPAN */
-p {
+/* TEXT */
+#typing {
   max-width: 320px;
   margin: auto;
   line-height: 1.5;
-  opacity: 0.9;
+  white-space: pre-line;
 }
 
 /* HEART */
@@ -109,16 +103,6 @@ p {
   0% { transform: translateY(0); opacity:1; }
   100% { transform: translateY(-100vh); opacity:0; }
 }
-
-button.msg {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: #ff4d6d;
-  color: white;
-  cursor: pointer;
-}
 </style>
 </head>
 
@@ -126,54 +110,66 @@ button.msg {
 
 <!-- OPENING -->
 <div id="opening">
-  <h1>Aku ada sesuatu buat kamu...</h1>
-  <button onclick="start()">Klik ya 💌</button>
+  <h2>Klik ya sayang 💌</h2>
+  <button onclick="start()">Masuk</button>
 </div>
 
+<!-- AUDIO -->
 <audio id="bgm" loop>
-  <source src="lagu.mp3" type="audio/mpeg">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <div id="main">
 
+  <!-- FOTO -->
   <div class="gallery">
     <img src="foto1.jpg">
     <img src="foto2.jpg">
     <img src="foto3.jpg">
     <img src="foto4.jpg">
+    <img src="foto5.jpg">
   </div>
 
   <div class="container">
-    <img src="foto-utama.jpg" class="main-img">
+    <img src="foto1.jpg" class="main-img">
 
     <h2>Happy Birthday 🎉</h2>
 
-    <!-- UCAPAN ASLI KAMU -->
-    <p>
-haiii afellll sayanggg💐<br>
-happy level up yaa sayanggg<br>
-panjang umurr sehatt selalu gantengggg🫶🏻<br>
-semogaa semua impian kamu tercapai,<br>
-jadi pribadi yang lebih dewasa,<br>
-dan tetap semangat yaa aca selalu doain kamu🤍<br>
-sayanggg maafin aca ya slama ini ada salah sama kamuu,selalu bikin masalah:(<br>
-semoga kedepannya hubungan kita lebih baik lagi yaa aamiinn🤍 heheeee udaaa legall nihhhh pibessdeyyyy yawww bocikkkkkuuu😡🫶🏻<br>
-bahagia selaluuuu bocikkk kesayangan acaaaaaaaaa❤‍🩹🫂
-    </p>
-
-    <button class="msg" onclick="alert('I LOVE YOU 💖')">
-      Klik ini ya
-    </button>
+    <!-- TEXT KETIK -->
+    <p id="typing"></p>
   </div>
 
 </div>
 
 <script>
+// UCAPAN ASLI (GA DIUBAH)
+const text = `haiii afellll sayanggg💐
+happy level up yaa sayanggg
+panjang umurr sehatt selalu gantengggg🫶🏻
+semogaa semua impian kamu tercapai,
+jadi pribadi yang lebih dewasa,
+dan tetap semangat yaa aca selalu doain kamu🤍
+sayanggg maafin aca ya slama ini ada salah sama kamuu,selalu bikin masalah:(
+semoga kedepannya hubungan kita lebih baik lagi yaa aamiinn🤍 heheeee udaaa legall nihhhh pibessdeyyyy yawww bocikkkkkuuu😡🫶🏻
+bahagia selaluuuu bocikkk kesayangan acaaaaaaaaa❤‍🩹🫂`;
+
+let i = 0;
+
+function typeText() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText, 40);
+  }
+}
+
 function start() {
   document.getElementById("opening").style.opacity = "0";
+
   setTimeout(() => {
     document.getElementById("opening").style.display = "none";
     document.getElementById("main").style.opacity = "1";
+    typeText(); // mulai ketik
   }, 800);
 
   document.getElementById("bgm").play();
