@@ -3,117 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Sayang 💖</title>
+<title>HBD AFELL 💖</title>
 
 <style>
-body {
-  margin: 0;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:black;
+  overflow:hidden;
+  color:white;
+  text-align:center;
 }
 
-.container {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+/* SLIDESHOW */
+.slideshow{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
 }
 
-img {
-  width: 200px;
-  border-radius: 20px;
-  margin: 10px;
-  box-shadow: 0 0 25px pink;
-  animation: float 3s ease-in-out infinite;
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  animation:slideShow 25s infinite;
 }
 
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-10px);}
+.slide:nth-child(1){animation-delay:0s;}
+.slide:nth-child(2){animation-delay:5s;}
+.slide:nth-child(3){animation-delay:10s;}
+.slide:nth-child(4){animation-delay:15s;}
+.slide:nth-child(5){animation-delay:20s;}
+
+@keyframes slideShow{
+  0%{opacity:0}
+  10%{opacity:1}
+  30%{opacity:1}
+  40%{opacity:0}
+  100%{opacity:0}
 }
 
-#text {
-  font-size: 18px;
-  padding: 20px;
-  min-height: 120px;
+/* JUDUL */
+h1{
+  margin-top:30px;
+  font-size:30px;
+  text-shadow:0 0 25px pink;
+  animation: glow 2s infinite alternate;
 }
 
-button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  background: pink;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 5px;
+@keyframes glow{
+  from{ text-shadow:0 0 10px pink;}
+  to{ text-shadow:0 0 40px hotpink;}
 }
 
-.heart {
-  position: absolute;
-  color: pink;
-  animation: fall 5s linear infinite;
+/* TEXT TYPING */
+.message{
+  margin-top:20px;
+  padding:0 20px;
+  font-size:15px;
+  line-height:1.6;
+  text-shadow:0 0 10px pink;
+  white-space:pre-line;
 }
 
-@keyframes fall {
-  0% {transform: translateY(-100px);}
-  100% {transform: translateY(100vh);}
+/* HEART */
+.heart{
+  position:fixed;
+  color:pink;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(100vh) scale(0);}
+  50%{transform:scale(1);}
+  100%{transform:translateY(-10vh) scale(0);}
+}
+
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:red;
+  top:-10px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(100vh) rotate(360deg);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <img src="foto1.jpg">
-  <img src="foto2.jpg">
-  
-  <div id="text"></div>
-
-  <button onclick="start()">Klik ya sayang 💖</button>
-  <button onclick="playMusic()">Play Music 🎶</button>
+<div class="slideshow">
+  <img src="foto1.jpg" class="slide">
+  <img src="foto2.jpg" class="slide">
+  <img src="foto3.jpg" class="slide">
+  <img src="foto4.jpg" class="slide">
+  <img src="foto5.jpg" class="slide">
 </div>
+
+<h1>HAPPY BIRTHDAY AFELL 💖</h1>
+
+<div class="message" id="typing"></div>
 
 <audio id="music" loop>
   <source src="music.mp3" type="audio/mp3">
 </audio>
 
 <script>
-let message = "haiii afellll sayanggg, happy level up yaa sayanggg, semogaa apa yang afelll inginkan segera tercapai, semoga di umur 18 tahun ini kamu bisa jadi pribadi yang lebih baik lagi ya sayangg? lebih bisa berfikir secara dewasa, lebih bisa bertindak secara dewasa aamiinn, tetap semangat buat membangunn masa depan dan jangan menyerah buat jadi orang sukses aca doakan selalu disini sayanggg semangat yaaaaw ❤️";
 
-let i = 0;
-
-function start(){
-  document.getElementById("text").innerHTML = "";
-  i = 0;
-  typeWriter();
+// START PAS DI KLIK (biar musik jalan)
+document.body.onclick = () => {
+  document.getElementById("music").play();
+  startTyping();
+  startConfetti();
 }
 
-function typeWriter(){
-  if(i < message.length){
-    document.getElementById("text").innerHTML += message.charAt(i);
-    i++;
-    setTimeout(typeWriter, 35);
+// TYPING TEXT
+const text = `haiii afellll sayanggg 💖
+
+happy level up yaa sayanggg panjang umurr sehatt selalu gantengggg ✨
+
+semogaa semua impian kamu tercapai, jadi pribadi yang lebih dewasa 🥺
+
+dan tetap semangat yaa aca selalu doain kamu 💕
+
+sayanggg maafin aca ya slama ini ada salah sama ka 🥺
+nuu: (selalu bikin masalah:( 
+
+semoga kedepannya hubungan kita lebih baik lagi yaa aamiinn 🤍
+
+heheeee udaaa legall nihhhh pibessdeyyyy yawww bocikkkkkuuu 🎂
+
+bahagia selaluuuu bocikkk kesayangan acaaaaaaaa 💗`;
+
+let i = 0;
+function startTyping(){
+  let speed = 30;
+  function type(){
+    if(i < text.length){
+      document.getElementById("typing").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+// HEART LOOP
+setInterval(()=>{
+  let heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💖";
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.fontSize = (Math.random()*20+10)+"px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),5000);
+},300);
+
+// CONFETTI
+function startConfetti(){
+  for(let i=0;i<50;i++){
+    let c = document.createElement("div");
+    c.className="confetti";
+    c.style.left = Math.random()*100+"vw";
+    c.style.background = ["pink","red","white","hotpink"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(c);
+
+    setTimeout(()=>c.remove(),3000);
   }
 }
 
-function playMusic(){
-  document.getElementById("music").play();
-}
-
-// efek love jatuh
-setInterval(() => {
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = Math.random()*20 + 10 + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 5000);
-}, 300);
 </script>
 
 </body>
