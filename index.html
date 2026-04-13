@@ -15,20 +15,39 @@ body{
   color:white;
 }
 
-/* FRAME FOTO */
+/* MINI FOTO (ATAS) */
+.gallery{
+  position:absolute;
+  top:5%;
+  left:50%;
+  transform:translateX(-50%);
+  display:grid;
+  grid-template-columns:repeat(3,70px);
+  gap:10px;
+}
+
+.gallery img{
+  width:70px;
+  height:70px;
+  object-fit:cover;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(255,140,207,0.5);
+}
+
+/* FRAME FOTO UTAMA */
 .photo-frame{
   position:absolute;
-  top:30%;
+  top:40%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:260px;
-  height:320px;
+  width:250px;
+  height:300px;
   border-radius:20px;
   overflow:hidden;
   box-shadow:0 0 25px rgba(255,140,207,0.6);
 }
 
-/* FOTO */
+/* SLIDE */
 .slide{
   position:absolute;
   width:100%;
@@ -38,7 +57,6 @@ body{
   animation:fade 25s infinite;
 }
 
-/* 5 FOTO */
 .slide:nth-child(1){animation-delay:0s;}
 .slide:nth-child(2){animation-delay:5s;}
 .slide:nth-child(3){animation-delay:10s;}
@@ -53,10 +71,10 @@ body{
   100%{opacity:0}
 }
 
-/* BOX TEXT */
+/* TEXT */
 .container{
   position:absolute;
-  top:65%;
+  top:70%;
   left:50%;
   transform:translateX(-50%);
   width:85%;
@@ -70,7 +88,6 @@ body{
 
 h1{
   font-size:20px;
-  margin-bottom:8px;
   color:#ff8ccf;
 }
 
@@ -88,15 +105,12 @@ button{
   border-radius:10px;
   background:#ff8ccf;
   color:white;
-  font-size:12px;
 }
 
 /* HEART */
 .heart{
   position:fixed;
   bottom:-10px;
-  font-size:14px;
-  opacity:0.5;
   animation:float 6s linear infinite;
 }
 
@@ -109,7 +123,16 @@ button{
 
 <body>
 
-<!-- FOTO -->
+<!-- MINI FOTO -->
+<div class="gallery">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  <img src="foto3.jpg">
+  <img src="foto4.jpg">
+  <img src="foto5.jpg">
+</div>
+
+<!-- FRAME UTAMA -->
 <div class="photo-frame">
   <img src="foto1.jpg" class="slide">
   <img src="foto2.jpg" class="slide">
@@ -125,13 +148,12 @@ button{
   <button onclick="start()">tap here</button>
 </div>
 
-<!-- MUSIK -->
 <audio id="music" loop>
   <source src="music.mp3">
 </audio>
 
 <script>
-const text = `haiii afellll sayanggg 💐💐
+const text = `haiii afellll sayanggg 💐
 
 happy level up yaa sayanggg panjang umurr sehatt selalu gantengggg ✨
 
@@ -139,7 +161,7 @@ semogaa semua impian kamu tercapai, jadi pribadi yang lebih dewasa
 
 dan tetap semangat yaa aca selalu doain kamu 💕
 
-sayanggg maafin aca ya slama ini ada salah sama kamuu🥺 selalu bikin masalah:( 
+sayanggg maafin aca ya slama ini ada salah sama kamuu,selalu bikin masalah:( 
 
 semoga kedepannya hubungan kita lebih baik lagi yaa aamiinn 🤍
 
@@ -151,10 +173,9 @@ let i=0;
 
 function start(){
   document.getElementById("music").play();
-
   function type(){
     if(i<text.length){
-      document.getElementById("typing").innerHTML += text.charAt(i);
+      document.getElementById("typing").innerHTML+=text.charAt(i);
       i++;
       setTimeout(type,25);
     }
@@ -162,7 +183,6 @@ function start(){
   type();
 }
 
-/* HEART */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
