@@ -9,21 +9,27 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  font-family: 'Segoe UI', sans-serif;
-  background:black;
+  font-family:'Segoe UI',sans-serif;
+  background: radial-gradient(circle, #1a001a, black);
   overflow:hidden;
   color:white;
 }
 
-/* SLIDESHOW HALUS */
-.bg{
-  position:fixed;
-  width:100%;
-  height:100%;
-  z-index:-1;
+/* FRAME FOTO */
+.photo-frame{
+  position:absolute;
+  top:30%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:260px;
+  height:320px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 25px rgba(255,140,207,0.6);
 }
 
-.bg img{
+/* FOTO */
+.slide{
   position:absolute;
   width:100%;
   height:100%;
@@ -33,11 +39,11 @@ body{
 }
 
 /* 5 FOTO */
-.bg img:nth-child(1){animation-delay:0s;}
-.bg img:nth-child(2){animation-delay:5s;}
-.bg img:nth-child(3){animation-delay:10s;}
-.bg img:nth-child(4){animation-delay:15s;}
-.bg img:nth-child(5){animation-delay:20s;}
+.slide:nth-child(1){animation-delay:0s;}
+.slide:nth-child(2){animation-delay:5s;}
+.slide:nth-child(3){animation-delay:10s;}
+.slide:nth-child(4){animation-delay:15s;}
+.slide:nth-child(5){animation-delay:20s;}
 
 @keyframes fade{
   0%{opacity:0}
@@ -47,43 +53,50 @@ body{
   100%{opacity:0}
 }
 
-/* GLASS BOX */
+/* BOX TEXT */
 .container{
   position:absolute;
-  top:50%;
+  top:65%;
   left:50%;
-  transform:translate(-50%,-50%);
+  transform:translateX(-50%);
   width:85%;
   max-width:400px;
-  padding:20px;
-  border-radius:20px;
+  padding:15px;
+  border-radius:15px;
   background:rgba(0,0,0,0.5);
   backdrop-filter:blur(10px);
   text-align:center;
 }
 
-/* JUDUL */
 h1{
-  font-size:22px;
-  margin-bottom:10px;
-  letter-spacing:2px;
+  font-size:20px;
+  margin-bottom:8px;
   color:#ff8ccf;
 }
 
-/* TEXT */
 #typing{
   font-size:14px;
   line-height:1.6;
   white-space:pre-line;
-  opacity:0.9;
 }
 
-/* HEART MINIMAL */
+/* BUTTON */
+button{
+  margin-top:10px;
+  padding:6px 12px;
+  border:none;
+  border-radius:10px;
+  background:#ff8ccf;
+  color:white;
+  font-size:12px;
+}
+
+/* HEART */
 .heart{
   position:fixed;
   bottom:-10px;
   font-size:14px;
-  opacity:0.6;
+  opacity:0.5;
   animation:float 6s linear infinite;
 }
 
@@ -91,32 +104,21 @@ h1{
   0%{transform:translateY(0);}
   100%{transform:translateY(-100vh);}
 }
-
-/* BUTTON */
-button{
-  margin-top:15px;
-  padding:8px 15px;
-  border:none;
-  border-radius:10px;
-  background:#ff8ccf;
-  color:white;
-  font-size:13px;
-}
 </style>
 </head>
 
 <body>
 
 <!-- FOTO -->
-<div class="bg">
-  <img src="foto1.jpg">
-  <img src="foto2.jpg">
-  <img src="foto3.jpg">
-  <img src="foto4.jpg">
-  <img src="foto5.jpg">
+<div class="photo-frame">
+  <img src="foto1.jpg" class="slide">
+  <img src="foto2.jpg" class="slide">
+  <img src="foto3.jpg" class="slide">
+  <img src="foto4.jpg" class="slide">
+  <img src="foto5.jpg" class="slide">
 </div>
 
-<!-- BOX -->
+<!-- TEXT -->
 <div class="container">
   <h1>for afell 💖</h1>
   <div id="typing"></div>
@@ -129,14 +131,21 @@ button{
 </audio>
 
 <script>
-const text = `haiii afellll sayanggg 💖
+const text = `haiii afellll sayanggg 💐
+
 happy level up yaa sayanggg panjang umurr sehatt selalu gantengggg ✨
+
 semogaa semua impian kamu tercapai, jadi pribadi yang lebih dewasa 🥺
+
 dan tetap semangat yaa aca selalu doain kamu 💕
-sayanggg maafin aca ya slama ini ada salah sama kamu:(selalu bikin masalah:( 
+
+sayanggg maafin aca ya slama ini ada salah sama kamuu🥺 :(selalu bikin masalah:( 
+
 semoga kedepannya hubungan kita lebih baik lagi yaa aamiinn 🤍
+
 heheeee udaaa legall nihhhh pibessdeyyyy yawww bocikkkkkuuu 🎂
-bahagia selaluuuu bocikkk kesayangan acaaaaaaaa 💗`;
+
+bahagia selaluuuu bocikkk kesayangan acaaaaaaaa ❤‍🩹🫂 ';
 
 let i=0;
 
@@ -155,12 +164,11 @@ function start(){
 
 /* HEART */
 setInterval(()=>{
-  let h = document.createElement("div");
+  let h=document.createElement("div");
   h.className="heart";
   h.innerHTML="💖";
   h.style.left=Math.random()*100+"vw";
   document.body.appendChild(h);
-
   setTimeout(()=>h.remove(),6000);
 },1200);
 </script>
